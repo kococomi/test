@@ -6,7 +6,7 @@ import {
   clearComposeSuggestions,
   fetchComposeSuggestions,
   selectComposeSuggestion,
-  changeComposeContentType,
+ // changeComposeContentType,
   changeComposeSpoilerText,
   insertEmojiCompose,
   uploadCompose,
@@ -56,9 +56,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(changeComposeSpoilerText(checked));
   },
 
-  onChangeContentType(value) {
-    dispatch(changeComposeContentType(value));
-  },
+  //onChangeContentType(value) {
+    //dispatch(changeComposeContentType(value));
+  //},
 
   onPaste (files) {
     dispatch(uploadCompose(files));
