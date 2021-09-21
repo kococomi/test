@@ -95,9 +95,12 @@ gem 'webpacker', '~> 5.4'
 gem 'webpush', '~> 0.3'
 gem 'webauthn', '~> 3.0.0.alpha1'
 
+
 gem 'json-ld'
 gem 'json-ld-preloaded', '~> 3.1'
 gem 'rdf-normalize', '~> 0.4'
+
+gem 'redcarpet', '~> 3.5'
 
 group :development, :test do
   gem 'fabrication', '~> 2.22'

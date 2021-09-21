@@ -6,6 +6,7 @@ import {
   clearComposeSuggestions,
   fetchComposeSuggestions,
   selectComposeSuggestion,
+  changeComposeContentType,
   changeComposeSpoilerText,
   insertEmojiCompose,
   uploadCompose,
@@ -18,6 +19,7 @@ const mapStateToProps = state => ({
   spoilerText: state.getIn(['compose', 'spoiler_text']),
   privacy: state.getIn(['compose', 'privacy']),
   federation: state.getIn(['compose', 'federation']),
+  contentType: state.getIn(['compose', 'content_type']),
   focusDate: state.getIn(['compose', 'focusDate']),
   caretPosition: state.getIn(['compose', 'caretPosition']),
   preselectDate: state.getIn(['compose', 'preselectDate']),
@@ -52,6 +54,10 @@ const mapDispatchToProps = (dispatch) => ({
 
   onChangeSpoilerText (checked) {
     dispatch(changeComposeSpoilerText(checked));
+  },
+
+  onChangeContentType(value) {
+    dispatch(changeComposeContentType(value));
   },
 
   onPaste (files) {
