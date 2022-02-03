@@ -74,6 +74,9 @@ class PostStatusService < BaseService
     status_for_validation = @account.statuses.build(status_attributes)
 
     if status_for_validation.valid?
+      # Marking the status as destroyed is necessary to prevent the status from being
+      # persisted when the associated media attachments get updated when creating the
+      # scheduled status.
       status_for_validation.destroy
 
       # The following transaction block is needed to wrap the UPDATEs to
@@ -99,7 +102,8 @@ class PostStatusService < BaseService
   end
 
   def postprocess_status!
-    LinkCrawlWorker.perform_async(@status.id) unless @status.spoiler_text?
+    Trends.tags.register(@status)
+    LinkCrawlWorker.perform_async(@status.id)
     DistributionWorker.perform_async(@status.id)
     unless @status.local_only?
       ActivityPub::DistributionWorker.perform_async(@status.id)
