@@ -150,7 +150,6 @@ export function submitCompose(routerHistory) {
 
     api(getState).post('/api/v1/statuses', {
       status,
-      content_type: getState().getIn(['compose', 'content_type']),
       in_reply_to_id: getState().getIn(['compose', 'in_reply_to'], null),
       media_ids: media.map(item => item.get('id')),
       sensitive: getState().getIn(['compose', 'sensitive']),
@@ -158,6 +157,7 @@ export function submitCompose(routerHistory) {
       visibility: getState().getIn(['compose', 'privacy']),
       poll: getState().getIn(['compose', 'poll'], null),
       local_only: !getState().getIn(['compose', 'federation']),
+      content_type: getState().getIn(['compose', 'content_type']),
     }, {
       headers: {
         'Idempotency-Key': getState().getIn(['compose', 'idempotencyKey']),
