@@ -462,3 +462,6 @@ body, .landing-page, .public-layout {
     max-width: 200px;
 }
 
+.status.status-direct:not(.read) {
+  background: #2f3d489e;
+}
