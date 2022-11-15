@@ -1,6 +1,9 @@
 default: styles/application.scss
 contrast: styles/contrast.scss
 mastodon-light: styles/mastodon-light.scss
+Mastodon (Original Blue): styles/original-blue.scss
 Evangelion: styles/evangelion.scss
 Evangelion by Aurora: styles/evangelion2.scss
 Cowboy Bebop by Cola: styles/cowboycasino.scss
+Promare: styles/promare.scss
+
