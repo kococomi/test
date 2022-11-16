@@ -2530,8 +2530,12 @@ $ui-header-height: 55px;
     }
 
     .navigation-panel__logo{
-      display: none;
+      display: none !important;
     }
+
+.navigation-panel__logo {
+    display: none !important;
+}
 
     .column-link__icon {
       font-size: 18px;
