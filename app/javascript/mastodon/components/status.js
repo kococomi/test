@@ -386,7 +386,7 @@ class Status extends ImmutablePureComponent {
 
       account = status.get('account');
       status  = status.get('reblog');
-    } else if (showThread && status.get('in_reply_to_id') && status.get('in_reply_to_account_id') === status.getIn(['account', 'id'])) {
+ /*     } else if (showThread && status.get('in_reply_to_id') && status.get('in_reply_to_account_id') === status.getIn(['account', 'id'])) {
       const display_name_html = { __html: status.getIn(['account', 'display_name_html']) };
 
       prepend = (
@@ -394,7 +394,7 @@ class Status extends ImmutablePureComponent {
           <div className='status__prepend-icon-wrapper'><Icon id='reply' className='status__prepend-icon' fixedWidth /></div>
           <FormattedMessage id='status.replied_to' defaultMessage='Replied to {name}' values={{ name: <a onClick={this.handlePrependAccountClick} data-id={status.getIn(['account', 'id'])} href={`/@${status.getIn(['account', 'acct'])}`} className='status__display-name muted'><bdi><strong dangerouslySetInnerHTML={display_name_html} /></bdi></a> }} />
         </div>
-      );
+      );*/
     }
 
     if (pictureInPicture.get('inUse')) {
@@ -510,7 +510,8 @@ class Status extends ImmutablePureComponent {
           {prepend}
 
           <div className={classNames('status', `status-${status.get('visibility')}`, { 'status-reply': !!status.get('in_reply_to_id'), muted: this.props.muted })} data-id={status.get('id')}>
-            <div className='status__info'>
+            <div className='status__expand' onClick={this.handleClick} role='presentation' />
+	    <div className='status__info'>
               <a onClick={this.handleClick} href={`/@${status.getIn(['account', 'acct'])}\/${status.get('id')}`} className='status__relative-time' target='_blank' rel='noopener noreferrer'>
                 <span className='status__visibility-icon'><Icon id={visibilityIcon.icon} title={visibilityIcon.text} /></span>
                 <RelativeTimestamp timestamp={status.get('created_at')} />{status.get('edited_at') && <abbr title={intl.formatMessage(messages.edited, { date: intl.formatDate(status.get('edited_at'), { hour12: false, year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit' }) })}> *</abbr>}
@@ -529,6 +530,7 @@ class Status extends ImmutablePureComponent {
               status={status}
               onClick={this.handleClick}
               expanded={!status.get('hidden')}
+              showThread={showThread}
               onExpandedToggle={this.handleExpandedToggle}
               onTranslate={this.handleTranslate}
               collapsable
