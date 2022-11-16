@@ -368,7 +368,7 @@
 }
 
 .compose-form {
-  padding: 15px;
+  padding: 10px;
 
   &__sensitive-button {
     padding: 10px;
@@ -715,7 +715,7 @@
 
     .compose-form__publish-button-wrapper {
       overflow: hidden;
-      padding-top: 15px;
+      padding-top: 10px;
     }
   }
 }
@@ -828,7 +828,7 @@
   font-weight: 400;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding-top: 2px;
+  padding-top: 5px;
   color: $primary-text-color;
 
   &:focus {
@@ -964,7 +964,7 @@
 }
 
 .status__content.status__content--collapsed {
-  max-height: 22px * 15; // 15 lines is roughly above 500 characters
+  max-height: 20px * 15; // 15 lines is roughly above 500 characters
 }
 
 .status__content__read-more-button {
@@ -975,7 +975,7 @@
   border: 0;
   background: transparent;
   padding: 0;
-  padding-top: 16px;
+  padding-top: 8px;
   text-decoration: none;
 
   &:hover,
@@ -1057,8 +1057,14 @@
   }
 }
 
+.status__prepend-icon-wrapper {
+  left: -26px;
+  position: absolute;
+}
+
 .status {
-  padding: 16px;
+  padding: 15px 15px 15px (48px + 15px * 2);
+  position: relative;
   min-height: 54px;
   border-bottom: 1px solid lighten($ui-base-color, 8%);
   cursor: auto;
@@ -1122,12 +1128,10 @@
 }
 
 .status__relative-time {
-  display: block;
-  font-size: 15px;
-  line-height: 22px;
-  height: 40px;
-  order: 2;
-  flex: 0 0 auto;
+  height: 20px !important;
+  float: right;
+  font-size: 14px;
+  padding-bottom: 1px;
   color: $dark-text-color;
 }
 
@@ -1147,36 +1151,17 @@
 }
 
 .status__info .status__display-name {
+  display: block !important;
   max-width: 100%;
-  display: flex;
-  font-size: 15px;
-  line-height: 22px;
-  align-items: center;
-  gap: 10px;
+  padding-right: 25px;
+  max-width: 100%;
   overflow: hidden;
-
-  .display-name {
-    bdi {
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    &__account {
-      white-space: nowrap;
-      display: block;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  }
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .status__info {
   font-size: 15px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
 }
 
 .status-check-box__status {
@@ -1215,14 +1200,12 @@
 }
 
 .status__prepend {
-  padding: 16px;
-  padding-bottom: 0;
-  display: flex;
-  gap: 10px;
-  font-size: 15px;
-  line-height: 22px;
-  font-weight: 500;
+  margin-left: 68px;
   color: $dark-text-color;
+  padding: 8px 0;
+  padding-bottom: 2px;
+  font-size: 14px;
+  position: relative;
 
   .status__display-name strong {
     color: $dark-text-color;
@@ -1353,7 +1336,7 @@
 }
 
 .account {
-  padding: 16px;
+  padding: 10px;
   border-bottom: 1px solid lighten($ui-base-color, 8%);
 
   &.compact {
@@ -1367,9 +1350,7 @@
 
   .account__display-name {
     flex: 1 1 auto;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    display: block;
     color: $darker-text-color;
     overflow: hidden;
     text-decoration: none;
@@ -1579,10 +1560,17 @@ a .account__avatar {
   padding: 14px 10px;
 
   .detailed-status__display-name {
+    color: $secondary-text-color;
     display: block;
+    line-height: 24px;
     margin-bottom: 15px;
     overflow: hidden;
   }
+}
+
+.detailed-status__display-avatar {
+  float: left;
+  margin-right: 10px;
 }
 
 .account-authorize__avatar {
@@ -1661,8 +1649,20 @@ a.account__display-name {
 .status__avatar {
   width: 46px;
   height: 46px;
+  position: absolute;
+  top: 17px;
+  width: 48px;
+  left: 15px;
 }
 
+.status__expand {
+  width: 68px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  cursor: pointer;
+}
 .muted {
   .status__content,
   .status__content p,
@@ -7128,7 +7128,7 @@ noscript {
 
     .account__header__joined {
       font-size: 14px;
-      padding-top: 5px 15px;
+      padding-top: 5px;
       color: $darker-text-color;
 
       .columns-area--mobile & {
@@ -8617,4 +8617,14 @@ noscript {
       }
     }
   }
+}
+
+.account__avatar-wrapper {
+  float: left !important;
+  margin-left: 6px;
+  margin-right: 12px;
+}
+
+.account__header__bar .avatar {
+  margin-left: 0;
 }
