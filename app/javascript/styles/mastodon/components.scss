@@ -2265,12 +2265,12 @@ $ui-header-height: 48px;
   }
 
   .tabs-bar {
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
 
     @media screen and (min-width: $no-gap-breakpoint) {
-      margin-bottom: 10px;
-    }
+      display: none !important;
   }
+ }
 }
 
 .react-swipeable-view-container {
@@ -2593,6 +2593,10 @@ $ui-header-height: 48px;
 
 @media screen and (max-width: $no-gap-breakpoint - 285px - 1px) {
   $sidebar-width: 55px;
+
+.tabs-bar__wrapper .tabs-bar {
+  margin-bottom: 10px;
+}
 
   .columns-area__panels__main {
     width: 100%;
