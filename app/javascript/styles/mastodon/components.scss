@@ -3191,6 +3191,44 @@ $ui-header-height: 48px;
   color: $dark-text-color;
   overflow: auto;
 
+  &__footer {
+    flex: 0 0 auto;
+    padding: 10px;
+    padding-top: 20px;
+    z-index: 1;
+    font-size: 13px;
+
+    ul {
+      margin-bottom: 10px;
+    }
+
+    ul li {
+      display: inline;
+    }
+
+    p {
+      color: $dark-text-color;
+      margin-bottom: 20px;
+
+      a {
+        color: $dark-text-color;
+        text-decoration: underline;
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: $darker-text-color;
+
+      &:hover,
+      &:focus,
+      &:active {
+        text-decoration: underline;
+      }
+    }
+  }
+
+
   &__trends {
     flex: 0 1 auto;
     opacity: 1;
@@ -7029,7 +7067,6 @@ noscript {
 
 .account__header {
   overflow: hidden;
-  background: lighten($ui-base-color, 4%);
 
   &.inactive {
     opacity: 0.5;
@@ -8406,33 +8443,33 @@ noscript {
   }
 }
 
-.link-footer {
-  flex: 0 0 auto;
-  padding: 10px;
-  padding-top: 20px;
-  z-index: 1;
-  font-size: 13px;
+// .link-footer {
+//  flex: 0 0 auto;
+//  padding: 10px;
+//  padding-top: 20px;
+//  z-index: 1;
+//  font-size: 13px;
 
-  p {
-    color: $dark-text-color;
-    margin-bottom: 20px;
-
-    strong {
-      font-weight: 500;
-    }
-
-    a {
-      color: $dark-text-color;
-      text-decoration: underline;
-
-      &:hover,
-      &:focus,
-      &:active {
-        text-decoration: none;
-      }
-    }
-  }
-}
+//  p {
+//    color: $dark-text-color;
+//    margin-bottom: 20px;
+//
+//    strong {
+//      font-weight: 500;
+//    }
+//
+//    a {
+//      color: $dark-text-color;
+//      text-decoration: underline;
+//
+//      &:hover,
+//      &:focus,
+//      &:active {
+//        text-decoration: none;
+//      }
+//    }
+//  }
+//}
 
 .about {
   padding: 20px;
@@ -8441,13 +8478,13 @@ noscript {
     border-radius: 4px;
   }
 
-  &__footer {
-    color: $dark-text-color;
-    text-align: center;
-    font-size: 15px;
-    line-height: 22px;
-    margin-top: 20px;
-  }
+//  &__footer {
+//    color: $dark-text-color;
+//    text-align: center;
+//    font-size: 15px;
+//    line-height: 22px;
+//    margin-top: 20px;
+//  }
 
   &__header {
     margin-bottom: 30px;
@@ -8569,7 +8606,7 @@ noscript {
     }
   }
 
-  .link-footer {
+  .getting-started__footer {
     padding: 0;
     margin-top: 60px;
     text-align: center;

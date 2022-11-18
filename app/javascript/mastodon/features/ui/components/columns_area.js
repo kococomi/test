@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import { defineMessages, injectIntl } from 'react-intl';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
+
 import ReactSwipeableViews from 'react-swipeable-views';
 import Header, { links, getIndex, getLink } from './header';
 import { Link } from 'react-router-dom';
+
 import { disableSwiping } from 'mastodon/initial_state';
+
 import BundleContainer from '../containers/bundle_container';
 import ColumnLoading from './column_loading';
 import DrawerLoading from './drawer_loading';
@@ -27,6 +30,7 @@ import {
 import Icon from 'mastodon/components/icon';
 import ComposePanel from './compose_panel';
 import NavigationPanel from './navigation_panel';
+
 import { supportsPassiveEvents } from 'detect-passive-events';
 import { scrollRight } from '../../../scroll';
 
@@ -56,7 +60,7 @@ class ColumnsArea extends ImmutablePureComponent {
 
   static contextTypes = {
     router: PropTypes.object.isRequired,
-    identity: PropTypes.object.isRequired,
+    identity: PropTypes.object,
   };
 
   static propTypes = {
@@ -68,8 +72,8 @@ class ColumnsArea extends ImmutablePureComponent {
   };
 
   // Corresponds to (max-width: $no-gap-breakpoint + 285px - 1px) in SCSS
-//  mediaQuery = 'matchMedia' in window && window.matchMedia('(max-width: 895px)');
-  mediaQuery = 'matchMedia' in window && window.matchMedia('(max-width: 1174px)');
+  mediaQuery = 'matchMedia' in window && window.matchMedia('(max-width: 895px)');
+//  mediaQuery = 'matchMedia' in window && window.matchMedia('(max-width: 1174px)');
 
   state = {
     shouldAnimate: false,

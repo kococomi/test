@@ -112,18 +112,26 @@ class GettingStarted extends ImmutablePureComponent {
     }
 
     return (
-      <Column>
-        {(signedIn && !multiColumn) ? <NavigationContainer /> : <ColumnHeader title={intl.formatMessage(messages.menu)} icon='bars' multiColumn={multiColumn} />}
+      <Column bindToDocument={!multiColumn} label={intl.formatMessage(messages.menu)}>
+        {multiColumn && <div className='column-header__wrapper'>
+          <h1 className='column-header'>
+            <button>
+              <Icon id='bars' className='column-header__icon' fixedWidth />
+              <FormattedMessage id='getting_started.heading' defaultMessage='Getting started' />
+            </button>
+          </h1>
+        </div>}
 
-        <div className='getting-started scrollable scrollable--flex'>
-          <div className='getting-started__wrapper'>
-            {navItems}
+        <div className='getting-started'>
+          <div className='getting-started__wrapper' >
+            {!multiColumn && <NavigationContainer />}
+              {navItems}
+            </div>
+
+            {!multiColumn && <div className='flex-spacer' />}
+
+            <LinkFooter />
           </div>
-
-          {!multiColumn && <div className='flex-spacer' />}
-
-          <LinkFooter />
-        </div>
 
         {(multiColumn && showTrends) && <TrendsContainer />}
 

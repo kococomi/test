@@ -320,7 +320,7 @@ body, .landing-page, .public-layout {
 }
 
 .account__section-headline {
-  background-color: rgba(17,17,17,0.9);
+  background-color: rgba(33, 26, 43, 0.9);
 }
 
 
@@ -371,7 +371,7 @@ body, .landing-page, .public-layout {
     min-height: 310px;
     padding-bottom: 71px;
     margin-bottom: -71px;
-    max-height: 500px;
+    max-height: 450px;
 }
 
 .drawer__inner {
@@ -476,7 +476,7 @@ body, .landing-page, .public-layout {
 }
 
 .focusable:focus .detailed-status, .focusable:focus .detailed-status__action-bar {
-    background: #43325c75;
+    background:  #43325c15;
 }
 
 .status.status-direct.status-reply.muted {
@@ -539,6 +539,10 @@ body, .landing-page, .public-layout {
     color: #85df72;
 }
 
+.contact-widget > a {
+  color: #fff;
+}
+
 .account__display-name strong {
     color: #ffaf41;
 }
@@ -594,6 +598,99 @@ body, .landing-page, .public-layout {
     background: #43325c60;
 }
 
-.account__header {
-  background: none;
+a.status-card.compact:hover {
+    background-color: #38284f7a;
+}
+
+a.status-card:hover {
+    background: #38284f7a;
+}
+
+.status-card__image {
+    background: #281b3ca3;
+    color: #818193;
+}
+
+.column-list {
+    background: #3e2e556b;
+}
+
+.nothing-here {
+    background: #3e2e556b;
+}
+
+.scrollable .account-card {
+    background: rgb(57 42 80 / 33%);
+}
+
+.dropdown-menu__item a, .dropdown-menu__item button  {
+   background: #f2e8fa;
+ }
+
+.dropdown-menu__container__header {
+    border-bottom: 1px solid #f2e8e8ba;
+}
+
+.dropdown-menu__item.edited-timestamp__history__item {
+    border-bottom: 1px solid #f2e8e8ba;
+}
+
+.dropdown-menu__item a:active, .dropdown-menu__item a:focus, .dropdown-menu__item a:hover, .dropdown-menu__item button:active, .dropdown-menu__item button:focus, .dropdown-menu__item button:hover {
+    background: #e2fed1ba;
+}
+
+.dropdown-menu, .dropdown-menu a {
+    background: #f2e8fa;
+}
+
+.actions-modal, .block-modal, .boost-modal, .compare-history-modal, .confirmation-modal, .mute-modal, .report-modal {
+    color: #43325c;
+    background: #e9daf4;
+}
+
+.account__section-headline button, .notification__filter-bar button {
+    background: rgba(33, 26, 43, 0.9);
+}
+
+.account-card__bio::after {
+    display: none;
+}
+
+
+.compose-form .autosuggest-textarea__suggestions__item.selected, .compose-form .autosuggest-textarea__suggestions__item:active, .compose-form .autosuggest-textarea__suggestions__item:focus, .compose-form .autosuggest-textarea__suggestions__item:hover {
+    background: rgba(111, 78, 158, 0.91);
+}
+
+.compose-form .autosuggest-textarea__suggestions {
+    background: #8862be;
+    color: #beb9c3;
+}
+
+.compose-form .autosuggest-account .display-name__account {
+   color: #ac96cc;
+}
+
+.explore__search-header .search__input {
+  border: 1px solid #564076;
+  padding: 10px;
+  background: transparent;
+}
+
+.explore__search-header {
+  background: rgba(33,26,43,.9);
+}
+
+.dismissable-banner {
+  background: #1d1528e6;
+}
+
+@media screen and (max-width: 889px) {
+    .search__input::-moz-focus-inner, .search__input:active, .search__input:focus {
+     outline: 0 !important;
+     border: 1px solid #abdd8873 !important;
+ }
+}
+
+.account__header__image {
+  background: #1d1a24d4;
 }
