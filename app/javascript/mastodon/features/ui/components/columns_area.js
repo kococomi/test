@@ -5,7 +5,8 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
 
 import ReactSwipeableViews from 'react-swipeable-views';
-import Header, { links, getIndex, getLink } from './header';
+import TabsBar, { links, getIndex, getLink } from './tabs_bar';
+
 import { Link } from 'react-router-dom';
 
 import { disableSwiping } from 'mastodon/initial_state';
@@ -30,7 +31,6 @@ import {
 import Icon from 'mastodon/components/icon';
 import ComposePanel from './compose_panel';
 import NavigationPanel from './navigation_panel';
-
 import { supportsPassiveEvents } from 'detect-passive-events';
 import { scrollRight } from '../../../scroll';
 
@@ -60,7 +60,7 @@ class ColumnsArea extends ImmutablePureComponent {
 
   static contextTypes = {
     router: PropTypes.object.isRequired,
-    identity: PropTypes.object,
+    identity: PropTypes.object.isRequired,
   };
 
   static propTypes = {
@@ -68,6 +68,7 @@ class ColumnsArea extends ImmutablePureComponent {
     columns: ImmutablePropTypes.list.isRequired,
     isModalOpen: PropTypes.bool.isRequired,
     singleColumn: PropTypes.bool,
+    multiColumn: PropTypes.bool,
     children: PropTypes.node,
   };
 
@@ -187,7 +188,6 @@ class ColumnsArea extends ImmutablePureComponent {
     this.node = node;
   }
 
-
   renderView = (link, index) => {
     const columnIndex = getIndex(this.context.router.history.location.pathname);
     const title = this.props.intl.formatMessage({ id: link.props['data-preview-title-id'] });
@@ -213,14 +213,14 @@ class ColumnsArea extends ImmutablePureComponent {
   }
 
   render () {
-    const { columns, children, singleColumn, isModalOpen, intl } = this.props;
+    const { columns, children, singleColumn, multiColumn, isModalOpen, intl } = this.props;
     const { shouldAnimate, renderComposePanel } = this.state;
     const { signedIn } = this.context.identity;
 
     const columnIndex = getIndex(this.context.router.history.location.pathname);
 
     if (singleColumn) {
-     const floatingActionButton = (!signedIn || shouldHideFAB(this.context.router.history.location.pathname)) ? null : <Link key='floating-action-button' to='/publish' className='floating-action-button' aria-label={intl.formatMessage(messages.publish)}><Icon id='pencil' /></Link>;
+      const floatingActionButton = (!signedIn || shouldHideFAB(this.context.router.history.location.pathname)) ? null : <Link key='floating-action-button' to='/publish' className='floating-action-button' aria-label={intl.formatMessage(messages.publish)}><Icon id='pencil' /></Link>;
 
       const content = columnIndex !== -1 ? (
         <ReactSwipeableViews key='content' hysteresis={0.2} threshold={15} index={columnIndex} onChangeIndex={this.handleSwipe} onTransitionEnd={this.handleAnimationEnd} animateTransitions={shouldAnimate} springConfig={{ duration: '400ms', delay: '0s', easeFunction: 'ease' }} style={{ height: '100%' }} disabled={disableSwiping}>
@@ -238,10 +238,17 @@ class ColumnsArea extends ImmutablePureComponent {
             </div>
           </div>
 
-          <div className={`columns-area__panels__main ${floatingActionButton && 'with-fab'}`}>
-            <Header key='tabs' />
-            {content}
+        {signedIn ? (
+          <div className='columns-area__panels__main'>
+            <TabsBar key='tabs' />
+              {content}
           </div>
+        ):(
+          <div className='columns-area__panels__main'>
+            <div className='tabs-bar__wrapper'><div id='tabs-bar__portal' /></div>
+            <div className='columns-area columns-area--mobile'>{children}</div>
+          </div>
+        )}
 
           <div className='columns-area__panels__pane columns-area__panels__pane--start columns-area__panels__pane--navigational'>
             <div className='columns-area__panels__pane__inner'>

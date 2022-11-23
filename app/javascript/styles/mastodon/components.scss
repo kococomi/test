@@ -1867,7 +1867,7 @@ a.account__display-name {
 }
 
 .navigation-bar {
-  padding: 15px;
+  padding: 10px;
   display: flex;
   align-items: center;
   flex-shrink: 0;
@@ -2265,13 +2265,9 @@ $ui-header-height: 48px;
   }
 
   .tabs-bar {
-    margin-bottom: 0 !important;
-
-    @media screen and (min-width: $no-gap-breakpoint) {
-      display: none !important;
+    margin-bottom: 0;
   }
  }
-}
 
 .react-swipeable-view-container {
   &,
@@ -2498,6 +2494,7 @@ $ui-header-height: 48px;
 @media screen and (min-width: $no-gap-breakpoint) {
   .tabs-bar {
     width: 100%;
+    display: none;
   }
 
   .react-swipeable-view-container .columns-area--mobile {
@@ -2530,22 +2527,23 @@ $ui-header-height: 48px;
 @media screen and (max-width: $no-gap-breakpoint - 1px) {
   $sidebar-width: 285px;
 
-
   .with-fab .scrollable .item-list:last-child {
     padding-bottom: 5.25rem;
   }
 
   .columns-area__panels__main {
-    width: 100% !important;
+    width: 100%;
+    max-width: 600px;
   }
 
   .columns-area__panels {
     min-height: 100vh;
-    justify-content: inherit;
+    justify-content: center;
   }
 
   .columns-area__panels__pane--navigational {
     min-width: $sidebar-width;
+    display: none;
 
     .columns-area__panels__pane__inner {
       width: $sidebar-width;
@@ -2594,16 +2592,17 @@ $ui-header-height: 48px;
 @media screen and (max-width: $no-gap-breakpoint - 285px - 1px) {
   $sidebar-width: 55px;
 
-.tabs-bar__wrapper .tabs-bar {
-  margin-bottom: 10px;
-}
-
   .columns-area__panels__main {
     width: 100%;
+    max-width: 1000px !important;
   }
 
+ .columns-area__panels__pane--compositional {
+  display: none;
+ }
   .columns-area__panels__pane--navigational {
     min-width: $sidebar-width;
+    display: none;
 
     .columns-area__panels__pane__inner {
       width: $sidebar-width;
@@ -2619,15 +2618,8 @@ $ui-header-height: 48px;
   }
 }
 
-.explore__search-header {
-  display: none;
-}
 
 @media screen and (max-width: $no-gap-breakpoint - 1px) {
-  .columns-area__panels__pane--compositional {
-    display: none;
-  }
-
   .explore__search-header {
     display: flex;
   }
@@ -8720,4 +8712,25 @@ noscript {
   width: 100%;
   gap: 10px;
   padding-right: 10px;
+}
+
+
+.columns-area__panels__main {
+  box-sizing: border-box;
+  width: 100%;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 895px) {
+.columns-area__panels__main {
+  padding: 0 10px;
+ }
+}
+
+@media screen and (min-width: 415px) {
+.tabs-bar__wrapper .tabs-bar {
+  margin-bottom: 10px;
+ }
 }

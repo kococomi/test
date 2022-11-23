@@ -55,9 +55,11 @@ class NavigationPanel extends React.Component {
           </React.Fragment>
         )}
 
-        {signedIn && showTrends ? (
+        {(signedIn && showTrends) && (
           <ColumnLink transparent to='/explore' icon='hashtag' text={intl.formatMessage(messages.explore)} />
-        ) : (
+        )}
+
+        {(signedIn && !showTrends) && (
           <ColumnLink transparent to='/search' icon='search' text={intl.formatMessage(messages.search)} />
         )}
 

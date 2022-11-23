@@ -694,3 +694,18 @@ a.status-card:hover {
 .account__header__image {
   background: #1d1a24d4;
 }
+
+body:after {
+	content: "";
+	position: fixed;
+	top: 0;
+	height: 100vh;
+	left: 0;
+	right: 0;
+	z-index: -1;
+	background: url(https://onlycasino.legal/packs/media/images/evangelion/evangelion-66553f1ec439dce9999b1220e9c86fd6.jpg) center center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}

@@ -1,13 +1,12 @@
 import React from 'react';
-import Logo from 'mastodon/components/logo';
 import { NavLink, Link, withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { registrationsOpen, me } from 'mastodon/initial_state';
-import { debounce } from 'lodash';
-import { isUserTouching } from '../../../is_mobile';
 import Avatar from 'mastodon/components/avatar';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { debounce } from 'lodash';
+import { isUserTouching } from '../../../is_mobile';
 import Icon from 'mastodon/components/icon';
 import NotificationsCounterIcon from './notifications_counter_icon';
 
@@ -38,7 +37,7 @@ export function getLink (index) {
 
 export default @injectIntl
 @withRouter
-class Header extends React.PureComponent {
+class TabsBar extends React.PureComponent {
 
   static contextTypes = {
     identity: PropTypes.object,
@@ -47,6 +46,7 @@ class Header extends React.PureComponent {
   static propTypes = {
     intl: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
+    location: PropTypes.object,
   }
 
   setRef = ref => {
@@ -85,8 +85,8 @@ class Header extends React.PureComponent {
 
   }
 
-
-//export default class Header extends React.PureComponent {
+//export default @withRouter
+//class Header extends React.PureComponent {
 
 //  static contextTypes = {
 //    identity: PropTypes.object,
@@ -98,39 +98,39 @@ class Header extends React.PureComponent {
 
   render () {
     const { signedIn } = this.context.identity;
+    const { location } = this.props;
     const { intl: { formatMessage } } = this.props;
-//    const { location } = this.props;
 
     let content;
 
     if (signedIn) {
       content = (
-      <>
-        <nav className='tabs-bar' ref={this.setRef}>
-          {links.map(link => React.cloneElement(link, { key: link.props.to, onClick: this.handleClick, 'aria-label': formatMessage({ id: link.props['data-preview-title-id'] }) }))}
-        </nav>
-
-        <div id='tabs-bar__portal' />
-      </>
-   );
-  } else {
+        <>
+  	<NavLink className='tabs-bar__link' to='/home' data-preview-title-id='column.home' data-preview-icon='home' ><Icon id='home' fixedWidth /><FormattedMessage id='tabs_bar.home' defaultMessage='Home' /></NavLink>
+  	<NavLink className='tabs-bar__link' to='/notifications' data-preview-title-id='column.notifications' data-preview-icon='bell' ><NotificationsCounterIcon /><FormattedMessage id='tabs_bar.notifications' defaultMessage='Notifications' /></NavLink>
+  	<NavLink className='tabs-bar__link' to='/public/local' data-preview-title-id='column.community' data-preview-icon='users' ><Icon id='users' fixedWidth /><FormattedMessage id='tabs_bar.local_timeline' defaultMessage='Local' /></NavLink>
+  	<NavLink className='tabs-bar__link' exact to='/public' data-preview-title-id='column.public' data-preview-icon='globe' ><Icon id='globe' fixedWidth /><FormattedMessage id='tabs_bar.federated_timeline' defaultMessage='Federated' /></NavLink>
+  	<NavLink className='tabs-bar__link optional' to='/search' data-preview-title-id='tabs_bar.search' data-preview-icon='bell' ><Icon id='search' fixedWidth /><FormattedMessage id='tabs_bar.search' defaultMessage='Search' /></NavLink>
+  	<NavLink className='tabs-bar__link' style={{ flexGrow: '0', flexBasis: '30px' }} to='/getting-started' data-preview-title-id='getting_started.heading' data-preview-icon='bars' ><Icon id='bars' fixedWidth /></NavLink>
+        </>
+      );
+    } else {
       content = (
-      <div className='ui__header'>
-        <div className='logged_out_container'>
-          <React.Fragment>
-            <a href='/auth/sign_in' className='button'><FormattedMessage id='sign_in_banner.sign_in' defaultMessage='Sign in' /></a>
-            <a href={registrationsOpen ? '/auth/sign_up' : 'https://joinmastodon.org/servers'} className='button button-tertiary'><FormattedMessage id='sign_in_banner.create_account' defaultMessage='Create account' /></a>
-          </React.Fragment>
+        <>
+	<div className='logged_out_container'>
+          <a href='/auth/sign_in' className='button'><FormattedMessage id='sign_in_banner.sign_in' defaultMessage='Sign in' /></a>
+          <a href={registrationsOpen ? '/auth/sign_up' : 'https://joinmastodon.org/servers'} className='button button-tertiary'><FormattedMessage id='sign_in_banner.create_account' defaultMessage='Create account' /></a>
         </div>
-      </div>
+        </>
       );
     }
 
     return (
-        <div className='tabs-bar__wrapper'>
+      <div className='ui__header'>
           {content}
-        </div>
+      </div>
     );
   }
 
 }
+
