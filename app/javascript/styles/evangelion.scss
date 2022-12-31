@@ -23,6 +23,10 @@ $about-page-text: lighten($ui-base-color, 50%);
   }
 }
 
+.admin-wrapper {
+  background: #392b4f;
+}
+
 .about-body .mascot {
   display: none;
 }
@@ -708,4 +712,15 @@ body:after {
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
+}
+
+
+.tabs-bar__wrapper {
+  background: linear-gradient(90deg,#c6c9f2,#e9d8fa);
+}
+
+@media screen and (min-width: 415px) {
+.tabs-bar__wrapper .tabs-bar {
+  margin-bottom: 0 !important;
+ }
 }
