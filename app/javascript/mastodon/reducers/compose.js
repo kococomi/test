@@ -114,7 +114,7 @@ function statusToTextMentions(state, status) {
   }
 
   return set.union(status.get('mentions').filterNot(mention => mention.get('id') === me).map(mention => `@${mention.get('acct')} `)).join('');
-};
+}
 
 function clearAll(state) {
   return state.withMutations(map => {
@@ -133,7 +133,7 @@ function clearAll(state) {
     map.set('poll', null);
     map.set('idempotencyKey', uuid());
   });
-};
+}
 
 function appendMedia(state, media, file) {
   const prevSize = state.get('media_attachments').size;
@@ -153,7 +153,7 @@ function appendMedia(state, media, file) {
       map.set('sensitive', true);
     }
   });
-};
+}
 
 function removeMedia(state, mediaId) {
   const prevSize = state.get('media_attachments').size;
@@ -166,7 +166,7 @@ function removeMedia(state, mediaId) {
       map.set('sensitive', false);
     }
   });
-};
+}
 
 const insertSuggestion = (state, position, token, completion, path) => {
   return state.withMutations(map => {
@@ -229,8 +229,8 @@ const privacyPreference = (a, b) => {
 const hydrate = (state, hydratedState) => {
   state = clearAll(state.merge(hydratedState));
 
-  if (hydratedState.has('text')) {
-    state = state.set('text', hydratedState.get('text'));
+  if (hydratedState.get('text')) {
+    state = state.set('text', hydratedState.get('text')).set('focusDate', new Date());
   }
 
   return state;
@@ -347,13 +347,21 @@ export default function compose(state = initialState, action) {
       map.set('preselectDate', new Date());
       map.set('idempotencyKey', uuid());
 
-      if (action.status.get('language')) {
+      map.update('media_attachments', list => list.filter(media => media.get('unattached')));
+
+      if (action.status.get('language') && !action.status.has('translation')) {
         map.set('language', action.status.get('language'));
+      } else {
+        map.set('language', state.get('default_language'));
       }
 
       if (action.status.get('spoiler_text').length > 0) {
         map.set('spoiler', true);
         map.set('spoiler_text', action.status.get('spoiler_text'));
+
+        if (map.get('media_attachments').size >= 1) {
+          map.set('sensitive', true);
+        }
       } else {
         map.set('spoiler', false);
         map.set('spoiler_text', '');
@@ -442,6 +450,8 @@ export default function compose(state = initialState, action) {
   case TIMELINE_DELETE:
     if (action.id === state.get('in_reply_to')) {
       return state.set('in_reply_to', null);
+    } else if (action.id === state.get('id')) {
+      return state.set('id', null);
     } else {
       return state;
     }
@@ -453,7 +463,7 @@ export default function compose(state = initialState, action) {
       .setIn(['media_modal', 'dirty'], false)
       .update('media_attachments', list => list.map(item => {
         if (item.get('id') === action.media.id) {
-          return fromJS(action.media).set('unattached', true);
+          return fromJS(action.media).set('unattached', !action.attached);
         }
 
         return item;
@@ -537,4 +547,4 @@ export default function compose(state = initialState, action) {
   default:
     return state;
   }
-};
+}

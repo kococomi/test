@@ -315,11 +315,12 @@ RSpec.describe AccountsController, type: :controller do
 
         it_behaves_like 'common response characteristics'
 
+ 
         it 'renders public status' do
           expect(response.body).to include(ActivityPub::TagManager.instance.url_for(status))
         end
 
-        it 'renders self-reply' do
+        it 'does not renders self-reply' do
           expect(response.body).to include(ActivityPub::TagManager.instance.url_for(status_self_reply))
         end
 

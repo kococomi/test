@@ -17,6 +17,8 @@ class AccountsController < ApplicationController
     respond_to do |format|
       format.html do
         expires_in 0, public: true unless user_signed_in?
+
+        @rss_url = rss_url
       end
 
       format.rss do
@@ -45,7 +47,7 @@ class AccountsController < ApplicationController
   end
 
   def default_statuses
-    if current_user.nil?
+    if !user_signed_in?
       @account.statuses.without_local_only.where(visibility: [:public, :unlisted])
     else
       @account.statuses.where(visibility: [:public, :unlisted])

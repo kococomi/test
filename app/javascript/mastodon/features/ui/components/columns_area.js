@@ -79,7 +79,7 @@ class ColumnsArea extends ImmutablePureComponent {
   state = {
     shouldAnimate: false,
     renderComposePanel: !(this.mediaQuery && this.mediaQuery.matches),
-  }
+  };
 
   componentWillReceiveProps() {
     if (typeof this.pendingIndex !== 'number' && this.lastIndex !== getIndex(this.context.router.history.location.pathname)) {
@@ -135,7 +135,7 @@ class ColumnsArea extends ImmutablePureComponent {
       if (this.mediaQuery.removeEventListener) {
         this.mediaQuery.removeEventListener('change', this.handleLayoutChange);
       } else {
-        this.mediaQuery.removeListener(this.handleLayouteChange);
+        this.mediaQuery.removeListener(this.handleLayoutChange);
       }
     }
   }
@@ -149,7 +149,7 @@ class ColumnsArea extends ImmutablePureComponent {
 
   handleLayoutChange = (e) => {
     this.setState({ renderComposePanel: !e.matches });
-  }
+  };
 
   handleSwipe = (index) => {
     this.pendingIndex = index;
@@ -182,11 +182,11 @@ class ColumnsArea extends ImmutablePureComponent {
     }
 
     this._interruptScrollAnimation();
-  }
+  };
 
   setRef = (node) => {
     this.node = node;
-  }
+  };
 
   renderView = (link, index) => {
     const columnIndex = getIndex(this.context.router.history.location.pathname);
@@ -206,11 +206,11 @@ class ColumnsArea extends ImmutablePureComponent {
 
   renderLoading = columnId => () => {
     return columnId === 'COMPOSE' ? <DrawerLoading /> : <ColumnLoading multiColumn />;
-  }
+  };
 
   renderError = (props) => {
     return <BundleColumnError multiColumn errorType='network' {...props} />;
-  }
+  };
 
   render () {
     const { columns, children, singleColumn, multiColumn, isModalOpen, intl } = this.props;
